@@ -1,0 +1,83 @@
+﻿
+
+
+    <div class="form-horizontal">
+        <div class="label">
+            Catgory
+        </div>
+        <select id="drop"></select>
+
+        <div class="editor-label">
+            Name
+        </div>
+        <div class="editor-label">
+            <input type="text" id="txtname"  />
+        </div>
+
+        <div class="editor-label">
+            Description
+        </div>
+        <div class="editor-label">
+            <input type="text" id="txtDescription" />
+        </div>
+
+        <div class="editor-label">
+            Price
+        </div>
+        <div class="editor-label">
+            <input type="text" id="txtPrice" />
+        </div>
+        <div class="editor-label">
+            Image
+        </div>
+        <div class="editor-label">
+            <input type="file" id="txt"file />
+        </div>
+
+        <div class="editor-label">
+            <br />
+            <input class="btn-default" type="submit" id="btnSave1" value="Save" />
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+
+<script>
+    function encodeImageFileAsURL(element) {
+        var file = element.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            console.log('RESULT', reader.result);
+            $('#txtimg').val(reader.result);
+        }
+        reader.readAsDataURL(file);
+    }
+    $(document).ready(function () {
+        var testDdl = $('#drop');
+        $.ajax({
+
+            url: "http://localhost:51259/api/web/get",
+            type: "Get",
+            success: function (data) {
+                console.log(data[0])
+
+                for (var i = 0; i < data.length; i++) {
+                    var option = $("<option/>");
+                    option.attr("value", data[i].CatId).text(data[i].CatName);
+                    testDdl.append(option);
+                }
+            }
+
+        });
+
+
+
+      
+
+
+
+    });
+
+
+
+</script>
